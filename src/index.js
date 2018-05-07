@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from 'redux';
+
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -80,6 +81,8 @@ const Link = ({
   );
 };
 
+
+// gengyudong
 class FilterLink extends Component {
   componentDidMount() {
     const { store } = this.context;
@@ -176,6 +179,9 @@ const TodoList = ({
   </ul>
 );
 
+
+
+// gengyudong
 let nextTodoId = 0;
 const AddTodo = (props, { store }) => {
   let input;
