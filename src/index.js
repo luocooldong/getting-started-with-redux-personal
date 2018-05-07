@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from 'redux';
-import {Provider} from 'react-redux';
+import {Provider, connect} from 'react-redux';
 
 
 const todo = (state, action) => {
@@ -217,44 +217,33 @@ const getVisibleTodos = (
   }
 }
 
-class VisibleTodoList extends Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() =>
-      this.forceUpdate()
-    );
-  }
-  
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-  
-  render() {
-    const props = this.props;
-    const { store } = this.context;
-    const state = store.getState();
-    
-    return (
-      <TodoList
-        todos={
-          getVisibleTodos(
-            state.todos,
-            state.visibilityFilter
-          )
-        }
-        onTodoClick={id =>
-          store.dispatch({
-            type: 'TOGGLE_TODO',
-            id
-          })            
-        }
-      />
-    );
-  }
-}
-VisibleTodoList.contextTypes = {
-  store: React.PropTypes
+
+const mapStateToProps = (state) => {
+  return {
+    todos: getVisibleTodos(
+      state.todos,
+      state.visibilityFilter
+    )
+  };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTodoClick: (id) => {
+      dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      })
+    }
+  };
+};
+
+
+const VisibleTodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TodoList);
+
 
 const TodoApp = () => (
   <div>
