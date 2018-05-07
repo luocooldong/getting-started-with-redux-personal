@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from 'redux';
 
+
 /*
  * We will be explaining the code below
  * in the following lessons. For now,
  * feel free to click around and notice
- * how the dispatched action is logged
+ * how the current state tree is logged
  * to the console on every change.
  */
 
@@ -176,10 +177,10 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 const dispatch = (action) => {
-  console.log('----------------') || displayInPreview('----------------');
-  console.log('dispatching action:') || displayInPreview('dispatching action:');
-  console.log(action) || displayInPreview(action);
   store.dispatch(action);
+  console.log('----------------') || displayInPreview('----------------');
+  console.log('current state:') || displayInPreview('current state:');
+  console.log(store.getState()) || displayInPreview(store.getState().visibilityFilter);
 }
 const render = () => {
   ReactDOM.render(
@@ -192,10 +193,10 @@ const render = () => {
 }
 render();
 store.subscribe(render);
+console.log('current state:') || displayInPreview('current state:');
+console.log(store.getState()) || displayInPreview(store.getState().visibilityFilter);
+
 // noprotect
-
-
-
 
 // display in plunker preview
 function displayInPreview(string) {
@@ -203,6 +204,7 @@ function displayInPreview(string) {
   var newContent = document.createTextNode(string); 
   newDiv.appendChild(newContent);
   document.body.appendChild(newDiv)
+<<<<<<< HEAD
 }
 
 
@@ -224,3 +226,10 @@ function squareAll(items) {
     items[i] = square(items[i]);
   }
 }
+||||||| ed5f087... 02-react-redux-describing-state-changes-with-actions
+}
+=======
+}
+
+
+>>>>>>> parent of ed5f087... 02-react-redux-describing-state-changes-with-actions
