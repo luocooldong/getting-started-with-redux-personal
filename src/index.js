@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from 'redux';
+import {Provider} from 'react-redux';
+
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -81,8 +83,6 @@ const Link = ({
   );
 };
 
-
-// gengyudong
 class FilterLink extends Component {
   componentDidMount() {
     const { store } = this.context;
@@ -126,21 +126,15 @@ const Footer = () => (
   <p>
     Show:
     {' '}
-    <FilterLink
-      filter='SHOW_ALL'
-    >
+    <FilterLink filter='SHOW_ALL'>
       All
     </FilterLink>
     {', '}
-    <FilterLink
-      filter='SHOW_ACTIVE'
-    >
+    <FilterLink filter='SHOW_ACTIVE'>
       Active
     </FilterLink>
     {', '}
-    <FilterLink
-      filter='SHOW_COMPLETED'
-    >
+    <FilterLink filter='SHOW_COMPLETED'>
       Completed
     </FilterLink>
   </p>
@@ -179,9 +173,6 @@ const TodoList = ({
   </ul>
 );
 
-
-
-// gengyudong
 let nextTodoId = 0;
 const AddTodo = (props, { store }) => {
   let input;
@@ -272,22 +263,6 @@ const TodoApp = () => (
     <Footer />
   </div>
 );
-
-class Provider extends Component {
-  getChildContext() {
-    return {
-      store: this.props.store
-    }; 
-  }
-
-  render() {
-    return this.props.children;
-  }
-}
-
-Provider.childContextTypes = {
-  store: React.PropTypes
-};
 
 
 ReactDOM.render(
