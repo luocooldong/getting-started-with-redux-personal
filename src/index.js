@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from 'redux';
 
-
 /*
  * We will be explaining the code below
  * in the following lessons. For now,
  * feel free to click around and notice
- * how the current state tree is logged
+ * how the dispatched action is logged
  * to the console on every change.
  */
 
@@ -177,10 +176,10 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 const dispatch = (action) => {
-  store.dispatch(action);
   console.log('----------------') || displayInPreview('----------------');
-  console.log('current state:') || displayInPreview('current state:');
-  console.log(store.getState()) || displayInPreview(store.getState().visibilityFilter);
+  console.log('dispatching action:') || displayInPreview('dispatching action:');
+  console.log(action) || displayInPreview(action);
+  store.dispatch(action);
 }
 const render = () => {
   ReactDOM.render(
@@ -193,10 +192,10 @@ const render = () => {
 }
 render();
 store.subscribe(render);
-console.log('current state:') || displayInPreview('current state:');
-console.log(store.getState()) || displayInPreview(store.getState().visibilityFilter);
-
 // noprotect
+
+
+
 
 // display in plunker preview
 function displayInPreview(string) {
@@ -205,5 +204,3 @@ function displayInPreview(string) {
   newDiv.appendChild(newContent);
   document.body.appendChild(newDiv)
 }
-
-
